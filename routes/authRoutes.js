@@ -1,9 +1,11 @@
 import express from 'express';
 import {Signup,Login} from '../controllers/userController.js';
 const authrouter  = express.Router();
+import { verifyToken } from '../middlewares/takenVerify.js';
 
 authrouter.post('/signup',Signup);
 authrouter.post('/login',Login);
+authrouter.get('/verify-token',verifyToken)
 
 
 export default authrouter;
@@ -253,6 +255,22 @@ export default authrouter;
  *                 message:
  *                   type: string
  *                   example: "Database error."
+ */
+
+
+/**
+ * @swagger
+ * /api/auths/verify-token:
+ *   get:
+ *     summary: verify token
+ *     description: verify jwt token.
+ *     tags:
+ *       - Authentication
+ *     responses:
+ *       200:
+ *         description: Token is valid
+ *       401:
+ *         description: Missing or invalid token
  */
 
 
